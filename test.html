@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AeroDrop - Modal Grand Final</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "aerodrop-orange": "#ff6b35",
+              "aerodrop-light-orange": "#f7931e",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .gradient-bg {
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+      }
+
+      .product-card {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .add-to-draft-btn {
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all 0.3s ease;
+        opacity: 0;
+      }
+
+      .product-card:hover .add-to-draft-btn {
+        bottom: 15px;
+        opacity: 1;
+      }
+
+      .modal-content {
+        animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px) scale(0.95);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .success-icon {
+        background: linear-gradient(135deg, #10b981, #059669);
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
+      }
+
+      .help-button {
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+      }
+
+      .help-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.15);
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 min-h-screen">
+    <!-- Header matching AeroDrop style -->
+    <header class="bg-white border-b border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <!-- AeroDrop Logo -->
+            <div class="flex items-center">
+              <svg width="40" height="30" viewBox="0 0 120 80" class="mr-3">
+                <path
+                  d="M10 20 L70 20 L90 35 L70 50 L10 50 L30 35 Z"
+                  fill="#ff6b35"
+                />
+                <path
+                  d="M30 10 L90 10 L110 25 L90 40 L50 40 L70 25 Z"
+                  fill="#ff6b35"
+                  opacity="0.8"
+                />
+                <path
+                  d="M50 30 L80 30 L90 40 L80 50 L50 50 L60 40 Z"
+                  fill="#ff6b35"
+                  opacity="0.6"
+                />
+              </svg>
+              <span class="text-2xl font-bold text-gray-900">AERODROP</span>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="flex items-center text-gray-600">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="text-aerodrop-orange font-medium"
+                >Shahriar Kabbo</span
+              >
+              <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex">
+      <!-- Sidebar Navigation -->
+      <nav class="w-64 bg-white border-r border-gray-200 min-h-screen">
+        <div class="p-4">
+          <div class="flex items-center mb-6">
+            <div
+              class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3"
+            >
+              <span class="text-green-600 text-sm font-medium">S3</span>
+            </div>
+            <span class="text-gray-700 font-medium">store-3-testt</span>
+            <svg
+              class="w-4 h-4 ml-2 text-gray-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M15.707 4.293a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L9 8.586l4.293-4.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+              >
+                <svg
+                  class="w-5 h-5 mr-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+                  />
+                </svg>
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center px-4 py-2 bg-aerodrop-orange text-white rounded-lg"
+              >
+                <svg
+                  class="w-5 h-5 mr-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Find Products
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                id="draftProductsLink"
+                class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+              >
+                <svg
+                  class="w-5 h-5 mr-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                  <path
+                    fill-rule="evenodd"
+                    d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 2V6a1 1 0 112 0v1a1 1 0 11-2 0zm3 0V6a1 1 0 112 0v1a1 1 0 11-2 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Draft Products
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="flex-1">
+        <!-- Top Search Bar -->
+        <div class="gradient-bg px-6 py-4">
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0">
+              <label class="block text-white text-sm font-medium mb-2"
+                >Select Supplier</label
+              >
+              <select
+                class="w-48 px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
+              >
+                <option>Ali Express</option>
+                <option>Amazon</option>
+                <option>eBay</option>
+              </select>
+            </div>
+            <div class="flex-1">
+              <label class="block text-white text-sm font-medium mb-2"
+                >Search Products</label
+              >
+              <input
+                type="text"
+                placeholder="Search Products"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="p-6">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            <!-- Product 1 -->
+            <div
+              class="product-card bg-white rounded-lg shadow-md overflow-hidden border"
+            >
+              <div class="relative">
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDMwMCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjQwIiBmaWxsPSIjRkZGRkZGIi8+CjxyZWN0IHg9IjEwIiB5PSIxMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSIyMjAiIHJ4PSIxMCIgZmlsbD0iIzRDQUY1MCIvPgo8dGV4dCB4PSIxNTAiIHk9IjEzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE4IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+R3JlZW4gSmFkZSBQZW5kYW50PC90ZXh0Pgo8L3N2Zz4K"
+                  alt="Green Jade Pendant"
+                  class="w-full h-48 object-cover"
+                />
+                <button
+                  class="add-to-draft-btn bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-medium shadow-lg transition-all"
+                  onclick="openModal('The new style is...')"
+                >
+                  <svg
+                    class="w-4 h-4 inline mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Add to Draft
+                </button>
+              </div>
+              <div class="p-4">
+                <h3 class="text-gray-900 font-medium text-sm mb-2">
+                  The new style is...
+                </h3>
+                <p class="text-aerodrop-orange font-bold text-lg">US $4.65</p>
+                <p class="text-gray-500 text-xs">Product Cost</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="addToDraftModal"
+      class="fixed inset-0 bg-black bg-opacity-40 hidden items-center justify-center z-50 p-4"
+    >
+      <div
+        class="modal-content bg-white rounded-2xl max-w-md w-full shadow-2xl relative"
+      >
+        <!-- Close Button (top-right only) -->
+        <button
+          onclick="closeModal()"
+          class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-gray-600 transition-all duration-200"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+
+        <!-- Main Content -->
+        <div class="px-8 py-10">
+          <!-- Success Icon -->
+          <div class="text-center mb-6">
+            <div
+              class="success-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-green-500"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M5 13l4 4L19 7"
+                ></path>
+              </svg>
+            </div>
+
+            <!-- Title -->
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">
+              Product Added Successfully!
+            </h2>
+
+            <!-- Description -->
+            <div class="space-y-2 text-center">
+              <p class="text-gray-600 text-base">
+                The product
+                <span class="font-medium text-gray-900" id="productName"></span>
+                has been successfully added to your draft products.
+              </p>
+              <p class="text-gray-500 text-sm">
+                You can now review and publish it to your Shopify store.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Actions -->
+          <div class="flex justify-between items-center pt-4">
+            <!-- Need Help Button -->
+            <button
+              onclick="openUserGuide()"
+              class="help-button flex items-center space-x-2 bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 border border-blue-200 hover:border-blue-300"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+              <span>Need Help?</span>
+            </button>
+
+            <!-- Next Button -->
+            <button
+              onclick="goToDrafts()"
+              class="px-6 py-2.5 gradient-bg text-white rounded-lg font-medium hover:opacity-90 transition-all duration-200 flex items-center shadow-sm hover:shadow-md"
+            >
+              Next
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentProductName = "";
+
+      function openModal(productName) {
+        currentProductName = productName;
+        document.getElementById("productName").textContent = productName;
+        document.getElementById("addToDraftModal").classList.remove("hidden");
+        document.getElementById("addToDraftModal").classList.add("flex");
+
+        // Prevent body scroll when modal is open
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        document.getElementById("addToDraftModal").classList.add("hidden");
+        document.getElementById("addToDraftModal").classList.remove("flex");
+
+        // Restore body scroll
+        document.body.style.overflow = "";
+      }
+
+      function goToDrafts() {
+        // Navigate to Draft Products
+        document.getElementById("draftProductsLink").click();
+        closeModal();
+      }
+
+      function openUserGuide() {
+        // Add your user guide link here
+        // window.open('your-user-guide-url', '_blank');
+        alert("Need Help? User Guide will open here!");
+      }
+
+      // Close modal when clicking outside
+      document
+        .getElementById("addToDraftModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeModal();
+          }
+        });
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+    </script>
+  </body>
+</html>
