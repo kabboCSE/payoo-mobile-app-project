@@ -43,3 +43,49 @@ document.getElementById("cash-out-logo").addEventListener("click", function () {
   const cashOut = document.getElementById("cashout-form");
   cashOut.style.display = "block";
 });
+
+//cashout
+document.getElementById("withdraw-btn").addEventListener("click", function (e) {
+  e.preventDefault();
+  //amount withdraw
+
+  const agentNumber = document.getElementById("agent-number").value;
+
+  if (agentNumber.length < 11) {
+    alert("Agent Number should be over 10 digit");
+    return;
+  }
+
+  const amountWithdraw = parseInt(
+    document.getElementById("amountWithdraw").value
+  );
+
+  if (amountWithdraw < 11) {
+    alert("Amont should be over 10");
+
+    return;
+  }
+
+  if (amountWithdraw < 10) {
+    alert("Maximum about should be over 10 digit");
+    return;
+  }
+  //avai - bal
+  const availableBalance = document.getElementById("available-bal");
+  const getavailableBalance = parseFloat(
+    document.getElementById("available-bal").innerText
+  );
+  const newBalance = getavailableBalance - amountWithdraw;
+  availableBalance.innerText = newBalance;
+
+  if (newBalance < 0) {
+    alert("You dont have balance");
+    availableBalance.innerText = "0";
+    return;
+  }
+});
+
+document.getElementById("agent-number").addEventListener("click", function (e) {
+  e.preventDefault();
+  //amount withdraw
+});
