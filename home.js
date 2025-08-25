@@ -21,6 +21,29 @@ function setInnertext(value) {
   document.getElementById("available-bal").innerText = value;
 }
 
+// function handle toggle
+function handleToggle(id) {
+  const forms = document.getElementsByClassName("form");
+  for (const form of forms) {
+    form.style.display = "none";
+  }
+  const addMoney = (document.getElementById(id).style.display = "block");
+}
+
+//function btn toggle
+function handleBtn(id) {
+  const forms = document.getElementsByClassName("form-btn");
+  for (const btn of forms) {
+    btn.classList.remove("border-[#0874f2]", "bg-[#0874f20d]");
+    btn.classList.add("border-gray-300");
+  }
+  document.getElementById(id).classList.remove("border-gray-300");
+
+  document
+    .getElementById(id)
+    .classList.add("border-[#0874f2]", "bg-[#0874f20d]");
+}
+
 document.getElementById("addMoney-btn").addEventListener("click", function (e) {
   e.preventDefault(); // stops form from refreshing page
 
@@ -51,20 +74,48 @@ document.getElementById("addMoney-btn").addEventListener("click", function (e) {
 });
 
 //toggling
+//add money
 document
   .getElementById("add-money-logo")
   .addEventListener("click", function () {
-    const cashOut = document.getElementById("cashout-form");
-    cashOut.style.display = "none";
-    const addMoney = document.getElementById("addMoney");
-    addMoney.style.display = "block";
-  });
+    handleToggle("addMoney");
+    handleBtn("add-money-logo");
 
+    // btn-background
+    // const forms = document.getElementsByClassName("form-btn");
+    // for (const btn of forms) {
+    //   btn.classList.remove("border-[#0874f2]", "bg-[#0874f20d]");
+    //   btn.classList.add("border-gray-300");
+    // }
+    // document
+    //   .getElementById("add-money-logo")
+    //   .classList.remove("border-gray-300");
+
+    // document
+    //   .getElementById("add-money-logo")
+    //   .classList.add("border-[#0874f2]", "bg-[#0874f20d]");
+  });
+//cashout
 document.getElementById("cash-out-logo").addEventListener("click", function () {
-  const addMoney = document.getElementById("addMoney");
-  addMoney.style.display = "none";
-  const cashOut = document.getElementById("cashout-form");
-  cashOut.style.display = "block";
+  handleToggle("cashout-form");
+  handleBtn("cash-out-logo");
+});
+//transfer
+document
+  .getElementById("transfer-button")
+  .addEventListener("click", function () {
+    handleToggle("transfer-form");
+    handleBtn("transfer-button");
+  });
+// Get Bonus
+document.getElementById("getBonus-btn").addEventListener("click", function () {
+  handleToggle("getBonus-form");
+  handleBtn("getBonus-btn");
+});
+// Pay Bill
+document.getElementById("payBill-btn").addEventListener("click", function () {
+  handleToggle("payBill");
+  handleBtn("payBill-btn");
 });
 
 //cashout
@@ -72,16 +123,14 @@ document.getElementById("withdraw-btn").addEventListener("click", function (e) {
   e.preventDefault();
   //amount withdraw
 
-  const agentNumber = document.getElementById("agent-number").value;
+  const agentNumber = valueOnly("agent-number");
 
   if (agentNumber.length < 11) {
     alert("Agent Number should be over 10 digit");
     return;
   }
 
-  const amountWithdraw = parseInt(
-    document.getElementById("amountWithdraw").value
-  );
+  const amountWithdraw = getInputvalue("amountWithdraw");
 
   if (amountWithdraw < 11) {
     alert("Amont should be over 10");
@@ -94,21 +143,20 @@ document.getElementById("withdraw-btn").addEventListener("click", function (e) {
     return;
   }
   //avai - bal
-  const availableBalance = document.getElementById("available-bal");
-  const getavailableBalance = parseFloat(
-    document.getElementById("available-bal").innerText
-  );
+  // const availableBalance = document.getElementById("available-bal");
+  const getavailableBalance = getInnertext("available-bal");
+  //   document.getElementById("available-bal").innerText
+  // );
   const newBalance = getavailableBalance - amountWithdraw;
-  availableBalance.innerText = newBalance;
+  setInnertext(newBalance);
 
   if (newBalance < 0) {
     alert("You dont have balance");
-    availableBalance.innerText = "0";
+    setInnertext(0);
     return;
   }
 });
-
+//transfer money
 document.getElementById("agent-number").addEventListener("click", function (e) {
   e.preventDefault();
-  //amount withdraw
 });
