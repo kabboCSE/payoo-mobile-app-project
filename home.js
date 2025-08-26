@@ -1,4 +1,5 @@
 const pin = 1234;
+const transactionData = [];
 //function to get input values
 function getInputvalue(id) {
   const inputfieldNumber = parseFloat(document.getElementById(id).value);
@@ -62,6 +63,14 @@ document.getElementById("addMoney-btn").addEventListener("click", function (e) {
   //  call setinnerText function
   setInnertext(newBalance);
 
+  const data = {
+    name: "Add Money",
+    date: new Date().toLocaleTimeString(),
+  };
+
+  transactionData.push(data);
+  console.log(transactionData);
+
   if (accNumber.length < 11) {
     alert("Please Provide Correct Account Number");
     return;
@@ -117,7 +126,13 @@ document.getElementById("payBill-btn").addEventListener("click", function () {
   handleToggle("payBill");
   handleBtn("payBill-btn");
 });
-
+// Transactions
+document
+  .getElementById("transaction-btn")
+  .addEventListener("click", function () {
+    handleToggle("transactions-parent");
+    handleBtn("transaction-btn");
+  });
 //cashout
 document.getElementById("withdraw-btn").addEventListener("click", function (e) {
   e.preventDefault();
@@ -149,6 +164,14 @@ document.getElementById("withdraw-btn").addEventListener("click", function (e) {
   // );
   const newBalance = getavailableBalance - amountWithdraw;
   setInnertext(newBalance);
+
+  const data = {
+    name: "Cash Out",
+    date: new Date().toLocaleTimeString(),
+  };
+
+  transactionData.push(data);
+  console.log(transactionData);
 
   if (newBalance < 0) {
     alert("You dont have balance");
