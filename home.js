@@ -179,6 +179,53 @@ document.getElementById("sendNow-btn").addEventListener("click", function (e) {
   }
 });
 
+//Pay Bill
+//Pay Bill
+//cashout
+document
+  .getElementById("payBillAddMoney-btn")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    //amount withdraw
+
+    const agentNumber = valueOnly("biller-acc-number");
+
+    if (agentNumber.length < 11) {
+      alert("Agent Number should be over 10 digit");
+      return;
+    }
+
+    const amountAdd = getInputvalue("amountPay");
+
+    if (amountAdd < 11) {
+      alert("Amont should be over 10");
+
+      return;
+    }
+
+    //avai - bal
+    // const availableBalance = document.getElementById("available-bal");
+    const getavailableBalance = getInnertext("available-bal");
+    //   document.getElementById("available-bal").innerText
+    // );
+    const newBalance = getavailableBalance - amountAdd;
+    setInnertext(newBalance);
+
+    const data = {
+      name: "Cash Out",
+      date: new Date().toLocaleTimeString(),
+    };
+
+    transactionData.push(data);
+    console.log(transactionData);
+
+    if (newBalance < 0) {
+      alert("You dont have balance");
+      setInnertext(0);
+      return;
+    }
+  });
+
 //Transaction
 document
   .getElementById("transaction-btn")
